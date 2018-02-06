@@ -1,8 +1,9 @@
+require 'simplecov'
+SimpleCov.start { add_filter '/spec' }
+
 require_relative '../lib/colors'
 require 'pry'
 
-require 'simplecov'
-SimpleCov.start { add_filter '/spec' }
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

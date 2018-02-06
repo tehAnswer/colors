@@ -3,13 +3,13 @@ module Colors
     class Init < Dry::Struct
       attribute :rows,    Type::Coercible::Int
       attribute :columns, Type::Coercible::Int
-    end
 
-    def initialize(params)
-      params.slice(:rows, :columns).each do |k, v|
-        Colors::Boundaries.check(k, v)
+      def initialize(params)
+        params.slice(:rows, :columns).each do |k, v|
+          Colors::Boundaries.check(k, v)
+        end
+        super(params)
       end
-      super(params)
     end
   end
 end

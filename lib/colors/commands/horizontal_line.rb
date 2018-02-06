@@ -8,7 +8,7 @@ module Colors
 
       def initialize(params)
         params.slice(:start_col, :end_col, :row).each do |k, v|
-          Colors::Boundaries.check(:star)
+          Colors::Boundaries.check(k, v)
         end
         super(params)
       end

@@ -7,7 +7,7 @@ module Colors
         next if is_comment?(line) || line.strip.empty?
         tokens = line.split(' ')
         commands << command_for(tokens.first, tokens.drop(1))
-      rescue StandardError => e
+      rescue StandardError  => e
         raise Colors::ParseError.new(e.message)
       end
       commands

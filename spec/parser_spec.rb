@@ -11,6 +11,14 @@ RSpec.describe Colors::Parser do
         Colors::Commands::Pixel.new(row: 1, column: 3, color: :black),
         Colors::Commands::VerticalLine.new(column: 2, start_row: 1, end_row: 3, color: :white),
         Colors::Commands::HorizontalLine.new(start_col: 3, end_col: 5, row: 1, color: :pink),
+        Colors::Commands::Pixel.new(row: 1, column: 1, color: :pink),
+        Colors::Commands::Pixel.new(row: 1, column: 2, color: :black),
+        Colors::Commands::Pixel.new(row: 1, column: 3, color: :green),
+        Colors::Commands::Pixel.new(row: 1, column: 4, color: :cyan),
+        Colors::Commands::Pixel.new(row: 1, column: 5, color: :light_blue),
+        Colors::Commands::Pixel.new(row: 1, column: 6, color: :violet),
+        Colors::Commands::Pixel.new(row: 1, column: 7, color: :yellow),
+        Colors::Commands::Pixel.new(row: 1, column: 8, color: :red),
         Colors::Commands::Show.new
       ]
     end
