@@ -4,7 +4,7 @@ module Colors
       attribute :start_col, Type::Coercible::Int
       attribute :end_col,   Type::Coercible::Int
       attribute :row,       Type::Coercible::Int
-      attribute :color,     Type::Coercible::Symbol
+      attribute :color,     Type::Coercible::String
     end
   end
 end

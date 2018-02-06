@@ -1,6 +1,6 @@
 module Colors
   module Commands
-    class Clear
+    class Clear < Dry::Struct
     end
   end
 end

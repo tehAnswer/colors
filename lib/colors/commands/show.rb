@@ -1,6 +1,6 @@
 module Colors
   module Commands
-    class Show
+    class Show < Dry::Struct
     end
   end
 end
