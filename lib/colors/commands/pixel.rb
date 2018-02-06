@@ -4,6 +4,13 @@ module Colors
       attribute :row,    Type::Coercible::Int
       attribute :column, Type::Coercible::Int
       attribute :color,  Type::Coercible::String
+
+      def initialize(params)
+        params.slice(:row, :column).each do |k, v|
+          Colors::Boundaries.check(k,v)
+        end
+        super(params)
+      end
     end
   end
 end
