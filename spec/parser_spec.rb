@@ -10,7 +10,7 @@ RSpec.describe Colors::Parser do
         Colors::Commands::Clear.new(line: 2),
         Colors::Commands::Pixel.new(row: 1, column: 3, color: :black, line: 3),
         Colors::Commands::VerticalLine.new(column: 2, start_row: 1, end_row: 3, color: :white, line: 4),
-        Colors::Commands::HorizontalLine.new(start_col: 3, end_col: 5, row: 1, color: :pink, line: 5),
+        Colors::Commands::HorizontalLine.new(start_column: 3, end_column: 5, row: 1, color: :pink, line: 5),
         Colors::Commands::Pixel.new(row: 1, column: 1, color: :pink, line: 6),
         Colors::Commands::Pixel.new(row: 1, column: 2, color: :black, line: 7),
         Colors::Commands::Pixel.new(row: 1, column: 3, color: :green, line: 8),

@@ -11,6 +11,7 @@ module Colors
 
   def execute(file_path)
     commands = Depedencies[:parser].parse(file_path)
-    errors, warnings = commands.each { |cmd| }
+    semantic_results = Dependencies[:semantic_checker].check(commands)
+    Dependencies[:interpreter].execute(commands, semantic_results)
   end
 end

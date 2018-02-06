@@ -37,7 +37,7 @@ module Colors
         data = %i(column start_row end_row color line).zip(normalize_color(parameters).push(line))
         Colors::Commands::VerticalLine.new(data.to_h)
       when 'H'
-        data = %i(start_col end_col row color line).zip(normalize_color(parameters).push(line))
+        data = %i(start_column end_column row color line).zip(normalize_color(parameters).push(line))
         Colors::Commands::HorizontalLine.new(data.to_h)
       when 'L'
         data = %i(row column color line).zip(normalize_color(parameters).push(line))
