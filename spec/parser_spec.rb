@@ -74,7 +74,18 @@ RSpec.describe Colors::Parser do
 
     it { is_expected.to eq(commands) }
   end
+
   Dir[File.expand_path('../shared/wrong_arguments_*', __FILE__)].each do |file|
+    context 'invalid script (wrong call)' do
+      let(:file_path) { file }
+
+      it "#{file} throws error" do
+        expect { subject }.to raise_error(Colors::ParseError)
+      end
+    end
+  end
+
+  Dir[File.expand_path('../shared/boundaries_check*', __FILE__)].each do |file|
     context 'invalid script (wrong call)' do
       let(:file_path) { file }
 
