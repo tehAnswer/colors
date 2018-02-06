@@ -6,20 +6,20 @@ RSpec.describe Colors::Parser do
     let(:file_path) { File.expand_path('../shared/valid_script.txt', __FILE__) }
     let(:commands) do
       [
-        Colors::Commands::Init.new(rows: 10, columns: 10),
-        Colors::Commands::Clear.new,
-        Colors::Commands::Pixel.new(row: 1, column: 3, color: :black),
-        Colors::Commands::VerticalLine.new(column: 2, start_row: 1, end_row: 3, color: :white),
-        Colors::Commands::HorizontalLine.new(start_col: 3, end_col: 5, row: 1, color: :pink),
-        Colors::Commands::Pixel.new(row: 1, column: 1, color: :pink),
-        Colors::Commands::Pixel.new(row: 1, column: 2, color: :black),
-        Colors::Commands::Pixel.new(row: 1, column: 3, color: :green),
-        Colors::Commands::Pixel.new(row: 1, column: 4, color: :cyan),
-        Colors::Commands::Pixel.new(row: 1, column: 5, color: :light_blue),
-        Colors::Commands::Pixel.new(row: 1, column: 6, color: :violet),
-        Colors::Commands::Pixel.new(row: 1, column: 7, color: :yellow),
-        Colors::Commands::Pixel.new(row: 1, column: 8, color: :red),
-        Colors::Commands::Show.new
+        Colors::Commands::Init.new(rows: 10, columns: 10, line: 1),
+        Colors::Commands::Clear.new(line: 2),
+        Colors::Commands::Pixel.new(row: 1, column: 3, color: :black, line: 3),
+        Colors::Commands::VerticalLine.new(column: 2, start_row: 1, end_row: 3, color: :white, line: 4),
+        Colors::Commands::HorizontalLine.new(start_col: 3, end_col: 5, row: 1, color: :pink, line: 5),
+        Colors::Commands::Pixel.new(row: 1, column: 1, color: :pink, line: 6),
+        Colors::Commands::Pixel.new(row: 1, column: 2, color: :black, line: 7),
+        Colors::Commands::Pixel.new(row: 1, column: 3, color: :green, line: 8),
+        Colors::Commands::Pixel.new(row: 1, column: 4, color: :cyan, line: 9),
+        Colors::Commands::Pixel.new(row: 1, column: 5, color: :light_blue, line: 10),
+        Colors::Commands::Pixel.new(row: 1, column: 6, color: :violet, line: 11),
+        Colors::Commands::Pixel.new(row: 1, column: 7, color: :yellow, line: 12),
+        Colors::Commands::Pixel.new(row: 1, column: 8, color: :red, line: 13),
+        Colors::Commands::Show.new(line: 14)
       ]
     end
 
@@ -38,9 +38,9 @@ RSpec.describe Colors::Parser do
     let(:file_path) { File.expand_path('../shared/extraspaced_script.txt', __FILE__) }
     let(:commands) do
       [
-        Colors::Commands::Init.new(rows: 10, columns: 10),
-        Colors::Commands::VerticalLine.new(column: 1, start_row: 1, end_row: 2, color: :pink),
-        Colors::Commands::Show.new
+        Colors::Commands::Init.new(rows: 10, columns: 10, line: 1),
+        Colors::Commands::VerticalLine.new(column: 1, start_row: 1, end_row: 2, color: :pink, line: 2),
+        Colors::Commands::Show.new(line: 7)
       ]
     end
 
@@ -58,10 +58,10 @@ RSpec.describe Colors::Parser do
 
     let(:commands) do
       [
-        Colors::Commands::Init.new(rows: 10, columns: 10),
-        Colors::Commands::Pixel.new(row: 1, column: 1, color: :pink),
-        Colors::Commands::Clear.new,
-        Colors::Commands::Show.new
+        Colors::Commands::Init.new(rows: 10, columns: 10, line: 1),
+        Colors::Commands::Pixel.new(row: 1, column: 1, color: :pink, line: 2),
+        Colors::Commands::Clear.new(line: 3),
+        Colors::Commands::Show.new(line: 4)
       ]
     end
 
@@ -73,10 +73,10 @@ RSpec.describe Colors::Parser do
 
     let(:commands) do
       [
-        Colors::Commands::Pixel.new(row: 1, column: 1, color: :pink),
-        Colors::Commands::Init.new(rows: 10, columns: 10),
-        Colors::Commands::Clear.new,
-        Colors::Commands::Show.new
+        Colors::Commands::Pixel.new(row: 1, column: 1, color: :pink, line: 1),
+        Colors::Commands::Init.new(rows: 10, columns: 10, line: 2),
+        Colors::Commands::Clear.new(line: 3),
+        Colors::Commands::Show.new(line: 4)
       ]
     end
 

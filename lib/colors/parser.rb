@@ -3,12 +3,15 @@ module Colors
 
     def parse(file_path)
       commands = []
+      line_number = 1
       File.foreach(file_path) do |line|
         next if is_comment?(line) || line.strip.empty?
         tokens = line.split(' ')
-        commands << command_for(tokens.first, tokens.drop(1))
+        commands << command_for(tokens.first, tokens.drop(1), line_number)
       rescue StandardError  => e
         raise Colors::ParseError.new(e.message)
+      ensure
+        line_number = line_number + 1
       end
       commands
     end
@@ -19,25 +22,25 @@ module Colors
       line.start_with?(/^(\/\/|#|;;).*$/)
     end
 
-    def command_for(initial, parameters)
+    def command_for(initial, parameters, line)
       case initial.upcase
       when 'I'
-        data = %i(rows columns).zip(parameters).to_h
-        Colors::Commands::Init.new(data)
+        data = %i(rows columns line).zip(parameters.push(line))
+        Colors::Commands::Init.new(data.to_h)
       when 'C'
         raise StandardError, 'Command C does not take arguments.' unless parameters.empty?
-        Colors::Commands::Clear.new
+        Colors::Commands::Clear.new(line: line)
       when 'S'
         raise StandardError, 'Command S does not take arguments.' unless parameters.empty?
-        Colors::Commands::Show.new
+        Colors::Commands::Show.new(line: line)
       when 'V'
-        data = %i(column start_row end_row color).zip(normalize_color(parameters))
+        data = %i(column start_row end_row color line).zip(normalize_color(parameters).push(line))
         Colors::Commands::VerticalLine.new(data.to_h)
       when 'H'
-        data = %i(start_col end_col row color).zip(normalize_color(parameters))
+        data = %i(start_col end_col row color line).zip(normalize_color(parameters).push(line))
         Colors::Commands::HorizontalLine.new(data.to_h)
       when 'L'
-        data = %i(row column color).zip(normalize_color(parameters))
+        data = %i(row column color line).zip(normalize_color(parameters).push(line))
         Colors::Commands::Pixel.new(data.to_h)
       else
         raise StandardError, "Command #{initial} does not exist."

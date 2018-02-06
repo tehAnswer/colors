@@ -3,6 +3,7 @@ module Colors
     class Init < Dry::Struct
       attribute :rows,    Type::Coercible::Int
       attribute :columns, Type::Coercible::Int
+      attribute :line,    Type::Coercible::Int
 
       def initialize(params)
         params.slice(:rows, :columns).each do |k, v|
