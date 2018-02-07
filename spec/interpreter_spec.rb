@@ -24,12 +24,20 @@ RSpec.describe Colors::Interpreter do
     end
 
     let(:semantic_results) { [nil, nil] }
-
-    before do
-      expect(Kernel).to receive(:print).exactly(6).times.and_return('OK')
+    let(:matrix) do
+      [
+        ' '.colorize(background: :white),
+        ' '.colorize(background: :white),
+        "\n",
+        ' '.colorize(background: :white),
+        ' '.colorize(background: :white),
+        "\n"
+      ].reduce(:+)
     end
 
-    it { instance.execute(commands, semantic_results) }
+    it 'prints' do
+      expect { instance.execute(commands, semantic_results) }.to output(matrix).to_stdout
+    end
   end
 
   context 'executes clear' do
@@ -113,9 +121,12 @@ RSpec.describe Colors::Interpreter do
 
     let(:semantic_results) { [nil, error] }
 
+    subject { instance.execute(commands, semantic_results) }
 
-    it 'throws error' do
-      expect { instance.execute(commands, semantic_results) }.to raise_error(Colors::RuntimeError)
+    it 'throws error and prints it' do
+      expect do
+        expect { subject }.to output('foo'.red + "\n").to_stdout
+      end.to raise_error(Colors::RuntimeError)
     end
   end
 
@@ -134,8 +145,7 @@ RSpec.describe Colors::Interpreter do
     let(:semantic_results) { [nil, warning] }
 
     before do
-      expect(Kernel).to receive(:puts).once
-      instance.execute(commands, semantic_results)
+      expect { instance.execute(commands, semantic_results) }.to output("foo".yellow + "\n").to_stdout
     end
 
     it { expect(instance.data).to eq([:white, :white, :white, :white]) }
