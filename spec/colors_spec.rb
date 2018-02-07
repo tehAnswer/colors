@@ -43,7 +43,26 @@ RSpec.describe Colors do
 
   context 'executes script with warnings' do
     let(:file_path) { File.expand_path('../shared/warnings_script.txt', __FILE__) }
-    let(:board) { 'Error while parsing: Command S does not take arguments.'.red + "\n" }
+    let(:colors) do
+      [
+        ' '.colorize(background: :white),
+        ' '.colorize(background: :white),
+        "\n",
+        ' '.colorize(background: :white),
+        ' '.colorize(background: :white)
+      ].reduce(:+)
+    end
+    let(:board) do
+      [
+        'Ignoring line due to board overwrite on line 4. (L:1)'.yellow,
+        'Ignoring line due to board overwrite on line 4. (L:2)'.yellow,
+        'Ignoring line due to board overwrite on line 4. (L:3)'.yellow,
+        'Ignoring line due to clear overwrite on line 6. (L:5)'.yellow,
+        colors,
+        "Ignoring extra line; missing show command afterwards. (L:8)".yellow + "\n"
+      ].join("\n")
+    end
+
     it 'prints warnings and board' do
       expect { Colors.execute(file_path) }.to output(board).to_stdout
     end
