@@ -1,9 +1,16 @@
 module Colors
+  # The Parser is responsible for reading files, extract its tokens and make sense out of those in our reduced
+  # grammar. By leveraging typed structs (Dry::Struct), it offers lexical validations.
   class Parser
 
     def parse(file_path)
       commands = []
       line_number = 1
+      # File.foreach is the best way to read files as it's the solution that
+      # archives less memory consumption. Basically, the lines are being loaded
+      # into memory one by one, which becomes essential when reading larger files.
+      #
+      # https://felipeelias.github.io/ruby/2017/01/02/fast-file-processing-ruby.html    line_number = 1
       File.foreach(file_path) do |line|
         next if is_comment?(line) || line.strip.empty?
         tokens = line.split(' ')
@@ -47,6 +54,7 @@ module Colors
       end
     end
 
+    # Translates a color token to a Symbol
     def normalize_color(parameters)
       color = color_for(parameters.last)
       parameters[parameters.length - 1] = color

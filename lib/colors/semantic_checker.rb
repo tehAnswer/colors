@@ -1,4 +1,14 @@
 module Colors
+  # This class provides semantics validations, which are key to ensure that lexically correct
+  # programs with invalid commands do not get executed. Here is an psedo-example:
+  #
+  #    INIT MATRIX 10x10
+  #    PAINT 11 11 RED
+  #
+  # As you can see, this program will fail in runtime despite its lexical correctness. Therefore
+  # the SemanticChecker examinates the parsed commands to find any possible discrepancy, whether
+  # is a warning or an error, to hint the Interpreter on the consequences of executing a given
+  # line.
   class SemanticChecker
 
     def initialize
@@ -19,6 +29,8 @@ module Colors
 
     def check_init(cmd, next_commands)
       @state = :initialized
+      # An init command is only useless if there's not a SHOW command or if there's
+      # another INIT command before its next SHOW command.
       extra_line_warning(cmd, next_commands) || board_overwrite_warning(cmd, next_commands)
     end
 
@@ -73,10 +85,12 @@ module Colors
       { warnings: ["Ignoring line due to clear overwrite on line #{clear_line}. (L:#{cmd.line})"] }
     end
 
+    # Is this command/line useless in any sense possible? If yes, then warning.
     def useless_line_warning(cmd, next_commands)
       extra_line_warning(cmd, next_commands) || board_overwrite_warning(cmd, next_commands) || clear_overwrite_warning(cmd, next_commands)
     end
 
+    # Checks for out of bounds errors.
     def oob_errors(cmd)
       errors = search_for(:init).to_h.slice(:rows, :columns).map do |dimension, max_dimension|
         # Cheap singularize.

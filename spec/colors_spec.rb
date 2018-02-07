@@ -52,6 +52,7 @@ RSpec.describe Colors do
         ' '.colorize(background: :white)
       ].reduce(:+)
     end
+
     let(:board) do
       [
         'Ignoring line due to board overwrite on line 4. (L:1)'.yellow,

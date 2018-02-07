@@ -1,4 +1,11 @@
 module Colors
+  # The interpreter, having as an input the results from the semantic anylisis,
+  # executes commands if it proceeds. It first scans the semantic results for
+  # any errors, to ensure that only valid scripts are executed.
+  #
+  # If none errors were found, then it proceeds to execute each command. It also
+  # has the notion of warning. I was inspired by compilers optimizations to do
+  # this feature. In two words, the Interpreter won't execute a useless command.
   class Interpreter
     attr_reader :data
 
