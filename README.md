@@ -20,7 +20,7 @@ $ ./bin/colors /Path/To/Script
 
 ## Languague
 
-coloRs languague comes down to the following instructions:
+coloRs instructions set comes down to the following ones:
 
 | Command |   Attribute I  |    Attribute II   | Attribute III | Atributte IV |   Example   |                     Description                    |
 |:-------:|:--------------:|:-----------------:|:-------------:|:------------:|:-----------:|:--------------------------------------------------:|
