@@ -1,39 +1,23 @@
-# Colors
+# coloRs
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/colors`. To experiment with that code, run `bin/console` for an interactive prompt.
+![](https://d2ffutrenqvap3.cloudfront.net/items/2S2F1i3l2k2Z2F081x0p/Screen%20Recording%202018-02-07%20at%2009.07%20PM.gif?v=1ceaa036)
 
-TODO: Delete this and the text above, and describe your gem
+**coloRs** is a ~basic~ **_minimalistic_** interactive bitmap editor that allow its users to generate text-made images through a small script language. 
 
-## Installation
+## Languague
 
-Add this line to your application's Gemfile:
+coloRs languague comes down to the following instructions:
 
-```ruby
-gem 'colors'
-```
+| Command |   Attribute I  |    Attribute II   | Attribute III | Atributte IV |   Example   |                     Description                    |
+|:-------:|:--------------:|:-----------------:|:-------------:|:------------:|:-----------:|:--------------------------------------------------:|
+|    I    | Number of rows | Number of columns |       -       |       -      |  `I 10 10`  |        Specify the dimensions of the canvas.       |
+|    C    |        -       |         -         |       -       |       -      |     `C`     | Clears the canvas by painting everything in white. |
+|    S    |        -       |         -         |       -       |       -      |     `S`     |                 Prints the canvas.                 |
+|    H    |  Start column  |     End Column    |      Row      |     Color    | `H 1 2 3 R` |  Draws a horizontal line given a few coordinates.  |
+|    V    |     Column     |     Start Row     |    End Row    |     Color    | `V 2 3 6 L` |   Draws a vertical line given a few coordinates.   |
+|    L    |       Row      |       Column      |     Color     |       -      |  `P 1 1 G`  |                Paints a given pixel.               |
 
-And then execute:
 
-    $ bundle
 
-Or install it yourself as:
 
-    $ gem install colors
 
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/colors.
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
