@@ -4,6 +4,20 @@
 
 **coloRs** is a ~basic~ **_minimalistic_** interactive bitmap editor that allow its users to generate text-made images through a small script language. 
 
+# How To Use
+
+To get this running in your local machine, first clone the repository. Then you have some options depending on what you want:
+
+1. If you are in a hurry, build coloRs Docker image (``docker build .`). That would run the example showed above in the GIF.
+2. If you have a script you want to try out, then you can do indistinctly:
+
+```
+$ rake colors[/Path/To/Script] 
+  ...
+$ ./bin/colors /Path/To/Script
+  ...
+```
+
 ## Languague
 
 coloRs languague comes down to the following instructions:
