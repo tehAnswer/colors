@@ -136,11 +136,10 @@ RSpec.describe Colors::SemanticChecker do
       ]
     end
 
-    let(:init_warnings) { subject[0][:warnings] }
+    let(:init_warnings) { subject[0] }
     let(:pixel_warnings) { subject[1][:warnings] }
 
-    it { expect(init_warnings).to include('Ignoring line due to clear overwrite on line 3. (L:1)')  }
-    it { expect(init_warnings.length).to eq(1)  }
+    it { expect(init_warnings).to be_nil }
 
     it { expect(pixel_warnings).to include('Ignoring line due to clear overwrite on line 3. (L:2)') }
     it { expect(pixel_warnings.length).to eq(1) }
