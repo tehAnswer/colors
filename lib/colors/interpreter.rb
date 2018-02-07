@@ -27,7 +27,7 @@ module Colors
 
     def execute_init(command)
       @columns = command.columns
-      @data = Array.new(command.rows + command.columns) { :white }
+      @data = Array.new(command.rows * command.columns) { :white }
     end
 
     def execute_clear(_)
@@ -37,7 +37,7 @@ module Colors
     def execute_show(_)
       @data.each_with_index do |element, index|
         print ' '.colorize(background: element)
-        print "\n" if index % @columns - 1 == 0
+        print "\n" if (index + 1) % @columns == 0
       end
     end
 
