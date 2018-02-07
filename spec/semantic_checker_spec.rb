@@ -5,7 +5,7 @@ RSpec.describe Colors::SemanticChecker do
   context 'not initialized board' do
     let(:commands) do
       [
-        Colors::Commands::Pixel.new(row: 1, column: 1, color: :blacki, line: 1)
+        Colors::Commands::Pixel.new(row: 1, column: 1, color: :black, line: 1)
       ]
     end
 

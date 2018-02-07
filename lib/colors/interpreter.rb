@@ -49,7 +49,7 @@ module Colors
     end
 
     def execute_pixel(command)
-      @data[command.row - 1 + command.column - 1] = command.color.to_sym
+      @data[(command.row - 1) * @columns + command.column - 1] = command.color.to_sym
     end
 
     def scan_errors!(semantic_results)

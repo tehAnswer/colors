@@ -19,7 +19,7 @@ module Colors
 
     def check_init(cmd, next_commands)
       @state = :initialized
-      useless_line_warning(cmd, next_commands)
+      extra_line_warning(cmd, next_commands) || board_overwrite_warning(cmd, next_commands)
     end
 
     def check_pixel(cmd, next_commands)
@@ -50,23 +50,31 @@ module Colors
       { errors: ["Not initialized board to paint on. (L:#{cmd.line})"] } if @state == :empty
     end
 
-    def useless_line_warning(cmd, next_commands)
+    def extra_line_warning(cmd, next_commands)
+      return nil if next_commands.index { |c| c.name == :show  }
+      { warnings: ["Ignoring extra line; missing show command afterwards. (L:#{cmd.line})"] }
+    end
+
+    def board_overwrite_warning(cmd, next_commands)
+      next_show_index  = next_commands.index { |c| c.name == :show  }
       next_init_index  = next_commands.index { |c| c.name == :init  }
+      return nil unless next_init_index && (next_init_index < next_show_index)
+
+      init_line = next_commands[next_init_index].line
+      { warnings: ["Ignoring line due to board overwrite on line #{init_line}. (L:#{cmd.line})"] }
+    end
+
+    def clear_overwrite_warning(cmd, next_commands)
       next_show_index  = next_commands.index { |c| c.name == :show  }
       next_clear_index = next_commands.index { |c| c.name == :clear }
-      message = case
-                when next_show_index.nil?
-                  "Ignoring extra line; missing show command afterwards. (L:#{cmd.line})"
-                when next_init_index && (next_init_index < next_show_index)
-                  init_line = next_commands[next_init_index].line
-                  "Ignoring line due to board overwrite on line #{init_line}. (L:#{cmd.line})"
-                when next_clear_index && (next_clear_index < next_show_index)
-                  clear_line = next_commands[next_clear_index].line
-                  "Ignoring line due to clear overwrite on line #{clear_line}. (L:#{cmd.line})"
-                else
-                  nil
-                end
-      { warnings: [message] } if message
+      return nil unless next_clear_index && (next_clear_index < next_show_index)
+
+      clear_line = next_commands[next_clear_index].line
+      { warnings: ["Ignoring line due to clear overwrite on line #{clear_line}. (L:#{cmd.line})"] }
+    end
+
+    def useless_line_warning(cmd, next_commands)
+      extra_line_warning(cmd, next_commands) || board_overwrite_warning(cmd, next_commands) || clear_overwrite_warning(cmd, next_commands)
     end
 
     def oob_errors(cmd)
@@ -74,17 +82,19 @@ module Colors
         # Cheap singularize.
         dimension_attribute = dimension.to_s.chop.to_sym
         cmd.to_h.map do |cmd_attribute, value|
-          next unless cmd_attribute.to_s.include?(dimension_attribute.to_s)
-          Colors::Boundaries.check(cmd_attribute, value, max: max_dimension)
-        rescue ArgumentError => e
-          e.message + " (L:#{cmd.line})"
+          begin
+            next unless cmd_attribute.to_s.include?(dimension_attribute.to_s)
+            Colors::Boundaries.check(cmd_attribute, value, max: max_dimension)
+          rescue ArgumentError => e
+            e.message + " (L:#{cmd.line})"
+          end
         end.compact
       end.flatten
       { errors: errors } unless errors.empty?
     end
 
     def search_for(cmd_name)
-      @commands.first { |cmd| cmd.name == cmd_name }
+      @commands.find { |cmd| cmd.name == cmd_name }
     end
 
     def index_of(cmd_name)

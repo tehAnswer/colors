@@ -2,6 +2,8 @@ PATH
   remote: .
   specs:
     colors (0.0.1)
+      colorize
+      dry-container
       dry-struct
 
 GEM
@@ -69,7 +71,6 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.16)
-  colorize
   colors!
   pry
   rake (~> 10.0)
