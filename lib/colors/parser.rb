@@ -32,7 +32,7 @@ module Colors
     def command_for(initial, parameters, line)
       case initial.upcase
       when 'I'
-        data = %i(rows columns line).zip(parameters.push(line))
+        data = %i(columns rows line).zip(parameters.push(line))
         Colors::Commands::Init.new(data.to_h)
       when 'C'
         raise StandardError, 'Command C does not take arguments.' unless parameters.empty?
