@@ -8,8 +8,8 @@
 
 To get this running in your local machine, first clone the repository. Then you have some options depending on what you want:
 
-1. If you are in a hurry, build coloRs Docker image (``docker build .`). That would run the example showed above in the GIF.
-2. If you have a script you want to try out, then you can do indistinctly:
+1. If you are in a hurry, build coloRs Docker image (`docker build .`). That would run the example showed above in the GIF.
+2. If you have a script you want to try out, then you have two other options: 
 
 ```
 $ rake colors[/Path/To/Script] 
@@ -20,7 +20,7 @@ $ ./bin/colors /Path/To/Script
 
 ## Languague
 
-coloRs languague comes down to the following instructions:
+coloRs instructions set comes down to the following ones:
 
 | Command |   Attribute I  |    Attribute II   | Attribute III | Atributte IV |   Example   |                     Description                    |
 |:-------:|:--------------:|:-----------------:|:-------------:|:------------:|:-----------:|:--------------------------------------------------:|
