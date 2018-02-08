@@ -110,9 +110,5 @@ module Colors
     def search_for(cmd_name)
       @commands.find { |cmd| cmd.name == cmd_name }
     end
-
-    def index_of(cmd_name)
-      @commands.index { |cmd| cmd.name == cmd_name }
-    end
   end
 end
